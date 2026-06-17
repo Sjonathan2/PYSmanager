@@ -1,58 +1,152 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PYS Manager — PickYourStyle Management App
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi manajemen UMKM konveksi/leather jacket berbasis web. Dibangun dengan Laravel 13, Tailwind CSS v4, Alpine.js, dan MySQL.
 
-## About Laravel
+## Fitur
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Dashboard** — Grafik penjualan 6 bulan, statistik kunci, produk terlaris, pesanan terbaru
+- **Inventory** — CRUD produk & varian (SKU, ukuran, warna, stok, harga), peringatan stok menipis
+- **Transaksi Keuangan** — Pencatatan pemasukan & pengeluaran, analisis laba per produk, grafik keuangan
+- **Pelanggan** — Data pelanggan lengkap dengan 5 ukuran badan (dada, bahu, lengan, badan, lingkar perut)
+- **Pemasok** — Data supplier dengan kontak dan tipe pasokan
+- **Pesanan Produksi** — Workflow status (PENDING → POTONG → JAHIT → FINISHING → SIAP → TERKIRIM)
+- **Visual Warehouse** — Peta gudang interaktif 25x15 dengan zona warna, drag-to-select, manajemen stok per container
+- **Dark Mode** — Toggle light/dark dengan persistensi localStorage
+- **Mobile Friendly** — Bottom navigation untuk mobile, sidebar untuk desktop
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Persyaratan Sistem
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.3+
+- Composer 2.x
+- Node.js 20+ & NPM
+- MySQL 8.0+ (atau MariaDB 10.4+)
+- Git
 
-## Learning Laravel
+## Instalasi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Windows
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. **Install prerequisites**
+   ```bash
+   # Install PHP 8.3+ — download dari https://windows.php.net/download/
+   # Install Composer — https://getcomposer.org/download/
+   # Install Node.js — https://nodejs.org/ (v20+)
+   # Install XAMPP / Laragon / MySQL Server — untuk database MySQL
+   ```
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+2. **Clone repositori**
+   ```bash
+   git clone https://github.com/Sjonathan2/PYSmanager.git
+   cd PYSmanager
+   ```
 
-## Agentic Development
+3. **Install dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+4. **Konfigurasi environment**
+   ```bash
+   copy .env.example .env
+   ```
+   Lalu edit `.env` — sesuaikan database MySQL:
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=pys_manager
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
 
+5. **Generate key & migrate database**
+   ```bash
+   php artisan key:generate
+   php artisan migrate --seed
+   ```
+
+6. **Jalankan aplikasi**
+   ```bash
+   php artisan serve
+   npm run dev
+   ```
+   Buka `http://localhost:8000` di browser.
+
+### Mac
+
+1. **Install prerequisites**
+   ```bash
+   # Install Homebrew jika belum: https://brew.sh/
+   brew install php@8.3 composer node
+   # Install MySQL:
+   brew install mysql
+   brew services start mysql
+   ```
+
+2. **Clone repositori**
+   ```bash
+   git clone https://github.com/Sjonathan2/PYSmanager.git
+   cd PYSmanager
+   ```
+
+3. **Install dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
+
+4. **Konfigurasi environment**
+   ```bash
+   cp .env.example .env
+   ```
+   Lalu edit `.env` — sesuaikan database MySQL:
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=pys_manager
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+
+5. **Generate key & migrate database**
+   ```bash
+   php artisan key:generate
+   php artisan migrate --seed
+   ```
+
+6. **Jalankan aplikasi**
+   ```bash
+   php artisan serve
+   npm run dev
+   ```
+   Buka `http://localhost:8000` di browser.
+
+### Menggunakan Laravel Herd (Mac & Windows)
+
+Alternatif yang lebih praktis — install [Laravel Herd](https://herd.laravel.com/) yang sudah termasuk PHP 8.3, Nginx, dan MySQL:
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+herd link pys-manager
+herd open
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Akun Default
 
-## Contributing
+Tidak ada sistem login/auth — aplikasi langsung bisa digunakan setelah migrate & seed. Data dummy sudah tersedia:
+- 10 produk dengan 4 varian masing-masing
+- 80 transaksi (6 bulan)
+- 8 pelanggan
+- 6 pemasok
+- 10 pesanan produksi
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Teknologi
 
-## Code of Conduct
+- **Backend:** Laravel 13, PHP 8.3
+- **Frontend:** Blade, Tailwind CSS v4, Alpine.js, Chart.js
+- **Database:** MySQL
+- **Build Tool:** Vite 8
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Lisensi
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT
