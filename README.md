@@ -131,14 +131,6 @@ herd link pys-manager
 herd open
 ```
 
-## Akun Default
-
-Tidak ada sistem login/auth — aplikasi langsung bisa digunakan setelah migrate & seed. Data dummy sudah tersedia:
-- 10 produk dengan 4 varian masing-masing
-- 80 transaksi (6 bulan)
-- 8 pelanggan
-- 6 pemasok
-- 10 pesanan produksi
 
 ## Teknologi
 
@@ -146,7 +138,3 @@ Tidak ada sistem login/auth — aplikasi langsung bisa digunakan setelah migrate
 - **Frontend:** Blade, Tailwind CSS v4, Alpine.js, Chart.js
 - **Database:** MySQL
 - **Build Tool:** Vite 8
-
-## Lisensi
-
-MIT
